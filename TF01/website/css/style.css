@@ -1,11 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #F4F6F9;
     font-family: Arial, sans-serif;
+    color: #2E2E2E;
     margin: 0;
     padding: 0;
 }
 
 body nav {
-    background-color: #333;
+    background-color: #0A1F44;
     padding: 10px 0;
 }
 
@@ -24,7 +34,29 @@ body header nav ul li {
 }
 
 body header nav ul li a {
-    color: rgb(0, 0, 0);
+    color: #2E2E2E;
     text-decoration: none;
     font-size: 18px;
+}
+
+body header nav ul li button {
+    background-color: #007BFF;
+    border: 2px solid #007BFF;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+main {
+    background-color: #F4F6F9;
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    background-color: #0A1F44;
+    color: #2E2E2E;
+    text-align: center;
+    padding: 10px 0;
 }
