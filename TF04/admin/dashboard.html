@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Dashboard</title>
+  <link rel="stylesheet" href="./css/admin.css">  
+</head>
+<body>
+  <h1>Status Dashboard</h1>
+  <div class="card">
+    <button onclick="fetchStatus()">Atualizar métricas</button>
+    <div class="metric">
+      <div><strong>Instância</strong><p id="instance">-</p></div>
+      <div><strong>Uptime (s)</strong><p id="uptime">-</p></div>
+      <div><strong>Requisições</strong><p id="requests">-</p></div>
+      <div><strong>Erros</strong><p id="errors">-</p></div>
+      <div><strong>Latência média (s)</strong><p id="latency">-</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Última requisição</h2>
+    <pre id="lastRequest">Sem dados</pre>
+  </div>
+  <script>
+    async function fetchStatus() {
+      try {
+        const response = await fetch('https://api.localhost/status');
+        const data = await response.json();
+        document.getElementById('instance').textContent = data.instance_id;
+        document.getElementById('uptime').textContent = data.uptime_seconds;
+        document.getElementById('requests').textContent = data.requests_total;
+        document.getElementById('errors').textContent = data.error_total;
+        document.getElementById('latency').textContent = data.average_latency_seconds;
+        document.getElementById('lastRequest').textContent = JSON.stringify(data.last_request, null, 2);
+      } catch (error) {
+        document.getElementById('lastRequest').textContent = 'Falha ao consultar status: ' + error;
+      }
+    }
+    fetchStatus();
+  </script>
+</body>
+</html>

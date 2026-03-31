@@ -1,0 +1,56 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-lb
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    restart: unless-stopped
+
+  backend1:
+    build:
+      context: ./backend
+    container_name: backend1
+    environment:
+      - INSTANCE_ID=backend1
+    restart: unless-stopped
+
+  backend2:
+    build:
+      context: ./backend
+    container_name: backend2
+    environment:
+      - INSTANCE_ID=backend2
+    restart: unless-stopped
+
+  backend3:
+    build:
+      context: ./backend
+    container_name: backend3
+    environment:
+      - INSTANCE_ID=backend3
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: ./admin
+    container_name: admin
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
