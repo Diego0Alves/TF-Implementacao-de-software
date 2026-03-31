@@ -1,4 +1,4 @@
-# Projeto de Load Balancer Avançado
+# Projeto de Load Balancer 
 
 Estrutura do projeto:
 
@@ -33,7 +33,7 @@ Estrutura do projeto:
 
 ## Uso
 
-1. Construir e subir os serviços:
+1. Construir e subir os serviï¿½os:
    ```bash
    docker-compose up --build
    ```
